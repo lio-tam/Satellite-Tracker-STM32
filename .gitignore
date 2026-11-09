@@ -1,0 +1,15 @@
+# macOS
+.DS_Store
+
+# STM32CubeIDE build output and per-user settings
+Debug/
+Release/
+.settings/
+*.launch
+
+# Python
+__pycache__/
+.venv/
+
+# draw.io backups
+*.bkp
