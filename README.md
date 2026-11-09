@@ -3,9 +3,14 @@
 A 3D-printed pan-tilt mount that points at the International Space Station (ISS) in real time. A Python script fetches the ISS position from a public API and streams it over USB serial to an STM32 Nucleo board. The board converts the position into azimuth and elevation angles for the observer's location and drives two stepper motors to match.
 
 Group project (Group 3), RWTH Aachen University, November 2024 – January 2025.
-<!-- TODO(Lio): add the course name, e.g. "for the course <name>". -->
 
 ![The tracker: lower stepper turns the base (azimuth), upper stepper tilts the arm (elevation)](docs/media/tracker_setup.jpg)
+
+## Demo
+
+| Lab test: the mount moving | Pointing checked against a stargazing app |
+|---|---|
+| ![The two-axis mount moving during a lab test](docs/media/tracker_motion.gif) | ![The arm points along the ISS track shown in a stargazing app](docs/media/tracker_vs_star_app.gif) |
 
 ## How it works
 
@@ -32,9 +37,12 @@ At start-up, each axis drives to a limit switch to find its home position and co
 3. **ENU → angles.** azimuth = atan2(E, N) and elevation = atan2(U, √(E² + N²)).
 4. **Refraction.** Corrects the elevation for atmospheric refraction with Bennett's approximation.
 
+I worked the ECEF → ENU step out by hand before coding it:
+
+<img src="docs/media/derivation_ecef_enu.jpg" alt="Handwritten derivation of the ECEF to ENU conversion" width="420"/>
+
 ## My role
 
-<!-- TODO(Lio): check the wording. -->
 - Wrote the angle-conversion module (`coord2angles.c` / `coord2angles.h`) in C, covering all four steps above.
 - Tested the integrated system at the end of the project and checked the pointing direction against a stargazing app.
 
