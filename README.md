@@ -10,12 +10,15 @@ Group project (Group 3), RWTH Aachen University, November 2024 – January 2025.
 ## How it works
 
 ```
-api.wheretheiss.at ──HTTP, ~1 Hz──▶ iss_position_streamer.py ──USB serial, "lat,lon,alt\r\n"──▶ NUCLEO-F429ZI
-                                                                                              │
-                                    coord2angles.c: ISS + observer position ─▶ azimuth, elevation
-                                    stepper.c:      STEP/DIR pulses to two stepper drivers
-                                                                                              ▼
-                                                     lower motor = azimuth, upper motor = elevation
+api.wheretheiss.at ─────[HTTP, ~1 Hz]───── 
+                                          │                                                                             
+                                          ─────▶ iss_position_streamer.py ─────[USB serial, "lat,lon,alt\r\n"]─────▶ NUCLEO-F429ZI
+                                                                                                                           │
+                                                                                          coord2angles.c: ISS + observer position ───▶ azimuth, elevation
+                                                                                          stepper.c:      STEP/DIR pulses to two stepper drivers
+                                                                                                                           │
+                                                                                                                           ▼
+                                                                                                 lower motor = azimuth, upper motor = elevation
 ```
 
 At start-up, each axis drives to a limit switch to find its home position and counts the steps in one revolution. After that, the main loop parses each new position message, recomputes the pointing angles and moves both motors by the change in angle.
