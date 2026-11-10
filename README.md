@@ -37,9 +37,9 @@ At start-up, each axis drives to a limit switch to find its home position and co
 3. **ENU → angles.** azimuth = atan2(E, N) and elevation = atan2(U, √(E² + N²)).
 4. **Refraction.** Corrects the elevation for atmospheric refraction with Bennett's approximation.
 
-I worked the ECEF → ENU step out by hand before coding it:
+I worked the conversion out by hand before coding it. This page shows the ECEF → ENU step; all three pages are in [`docs/derivation_notes.pdf`](docs/derivation_notes.pdf).
 
-<img src="docs/media/derivation_ecef_enu.jpg" alt="Handwritten derivation of the ECEF to ENU conversion" width="420"/>
+<img src="docs/media/derivation_ecef_enu.jpg" alt="Handwritten derivation of the ECEF to ENU conversion" width="480"/>
 
 ## My role
 
